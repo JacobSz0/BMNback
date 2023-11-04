@@ -87,7 +87,7 @@ app = FastAPI()
 origins = [
     "http://localhost",
     "http://localhost:3000",  # Example: React development server
-    "https://github.com/JacobSz0/BMNfront",  # The domain of your React app
+    "https://jacobsz0.github.io",  # The domain of your React app
 ]
 
 # Add the CORS middleware with allowed origins
