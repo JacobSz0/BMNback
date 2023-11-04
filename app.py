@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import sqlite3
 import json
+from fastapi.middleware.cors import CORSMiddleware
 
 def create_connection():
     connection = sqlite3.connect("bmn.db")
@@ -82,6 +83,22 @@ def delete_bmn(bmn_id: int):
     connection.close()
 
 app = FastAPI()
+
+origins = [
+    "http://localhost",
+    "http://localhost:3000",  # Example: React development server
+    "https://github.com/JacobSz0/BMNfront",  # The domain of your React app
+]
+
+# Add the CORS middleware with allowed origins
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.get("/")
 def read_root():
